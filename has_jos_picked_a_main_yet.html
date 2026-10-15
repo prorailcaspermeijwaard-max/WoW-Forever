@@ -4,35 +4,72 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Have We Figured Out Jos's Main for WoW Forever Yet?</title>
+
 <style>
-body {font-family: Arial, sans-serif;display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;background:#111;color:white;text-align:center;margin:0;}
-h1 {max-width:900px;padding:0 20px;}
-#answer {font-size:5rem;color:#ff5555;margin:20px 0;font-weight:bold;}
-#countdown {font-size:2rem;color:#ccc;}
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #111;
+    color: white;
+    text-align: center;
+    margin: 0;
+}
+
+h1 {
+    max-width: 900px;
+    padding: 0 20px;
+}
+
+#answer {
+    font-size: 5rem;
+    color: #ff5555;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+#countdown {
+    font-size: 2rem;
+    color: #ccc;
+}
 </style>
 </head>
 <body>
+
 <h1>Have We Figured Out Jos's Main for WoW Forever Yet?</h1>
+
 <div id="answer">No.</div>
 <div id="countdown"></div>
+
 <script>
 const revealDate = new Date("2026-11-05T00:00:00");
+
 function updateCountdown() {
-const now = new Date();
-const diff = revealDate - now;
-if (diff <= 0) {
- document.getElementById("answer").innerHTML = "Yes.";
- document.getElementById("countdown").innerHTML = "Turns out it was Warrior all along.";
- return;
+    const now = new Date();
+    const diff = revealDate - now;
+
+    if (diff <= 0) {
+        document.getElementById("answer").innerHTML = "Yes.";
+        document.getElementById("countdown").innerHTML =
+            "Turns out it was Warrior all along.";
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const mins = Math.floor((diff / (1000 * 60)) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("countdown").innerHTML =
+        `${days} Days ${hours} Hours ${mins} Minutes ${secs} Seconds`;
 }
-const days=Math.floor(diff/(1000*60*60*24));
-const hours=Math.floor((diff/(1000*60*60))%24);
-const mins=Math.floor((diff/(1000*60))%60);
-const secs=Math.floor((diff/1000)%60);
-document.getElementById("countdown").innerHTML=`${days} Days ${hours} Hours ${mins} Minutes ${secs} Seconds`;
-}
-setInterval(updateCountdown,1000);
+
+setInterval(updateCountdown, 1000);
 updateCountdown();
 </script>
+
 </body>
 </html>
