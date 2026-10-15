@@ -3,72 +3,241 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Has Jos figured out his main for WoW Forever Yet?</title>
+
+<title>Have We Figured Out Jos's Main for WoW Forever Yet?</title>
 
 <style>
 body {
+    background: #111;
+    color: white;
     font-family: Arial, sans-serif;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #111;
-    color: white;
-    text-align: center;
     margin: 0;
 }
 
 h1 {
     max-width: 900px;
-    padding: 0 20px;
+    margin-bottom: 30px;
 }
 
 #answer {
-    font-size: 5rem;
-    color: #ff5555;
-    margin: 20px 0;
+    font-size: 6rem;
     font-weight: bold;
+    color: #ff5555;
+}
+
+#status {
+    font-size: 1.8rem;
+    margin-top: 20px;
+    min-height: 50px;
+}
+
+#label {
+    margin-top: 30px;
+    font-size: 1.4rem;
+    color: #aaa;
 }
 
 #countdown {
     font-size: 2rem;
-    color: #ccc;
+    margin-top: 10px;
 }
+
+/* WoW class colors */
+
+.warrior { color: #C79C6E; }
+.paladin { color: #F58CBA; }
+.hunter { color: #ABD473; }
+.rogue { color: #FFF569; }
+.priest { color: #FFFFFF; }
+.deathknight { color: #C41F3B; }
+.shaman { color: #0070DE; }
+.mage { color: #69CCF0; }
+.warlock { color: #9482C9; }
+.druid { color: #FF7D0A; }
+
 </style>
 </head>
 <body>
 
-<h1>Has Jos figured out his main for WoW Forever Yet?</h1>
+<h1>Have We Figured Out Jos's Main for WoW Forever Yet?</h1>
 
-<div id="answer">No.</div>
+<div id="answer">NO.</div>
+
+<div id="status"></div>
+
+<div id="label">Time Remaining:</div>
+
 <div id="countdown"></div>
 
 <script>
+
 const revealDate = new Date("2026-11-05T00:00:00");
 
+const statuses = [
+
+{
+text: "Planning to tank as a Warrior.",
+class: "warrior"
+},
+
+{
+text: "Currently comparing Warrior and Paladin spreadsheets.",
+class: "paladin"
+},
+
+{
+text: "Guild predicts Warrior.",
+class: "warrior"
+},
+
+{
+text: "Watching tank tier-list #28.",
+class: "warrior"
+},
+
+{
+text: "Researching protection specs all evening.",
+class: "warrior"
+},
+
+{
+text: "Convinced he will NOT heal this time.",
+class: "priest"
+},
+
+{
+text: "Accidentally rolled Priest again.",
+class: "priest"
+},
+
+{
+text: "Somehow ended up healing another dungeon.",
+class: "priest"
+},
+
+{
+text: "Promised everyone he would finally tank.",
+class: "warrior"
+},
+
+{
+text: "Already collecting healing gear just in case.",
+class: "priest"
+},
+
+{
+text: "Levelling a Druid strictly for tanking purposes.",
+class: "druid"
+},
+
+{
+text: "Currently healing as that Druid.",
+class: "druid"
+},
+
+{
+text: "Considering Shaman. Dangerous development.",
+class: "shaman"
+},
+
+{
+text: "Swore never to heal again.",
+class: "priest"
+},
+
+{
+text: "Healing another raid wasn't part of the plan.",
+class: "priest"
+},
+
+{
+text: "Tank ambitions remain strong.",
+class: "warrior"
+},
+
+{
+text: "Priest probability exceeds expectations.",
+class: "priest"
+},
+
+{
+text: "Spreadsheet indicates Warrior (97.8%).",
+class: "warrior"
+},
+
+{
+text: "Actual gameplay indicates Healer (99.9%).",
+class: "priest"
+},
+
+{
+text: "Still pretending the healer outcome is avoidable.",
+class: "priest"
+},
+
+{
+text: "One more class guide should settle it.",
+class: "mage"
+},
+
+{
+text: "The committee remains undecided.",
+class: "rogue"
+}
+
+];
+
+function randomStatus() {
+    const status = statuses[Math.floor(Math.random() * statuses.length)];
+
+    document.getElementById("status").className = status.class;
+    document.getElementById("status").innerHTML = status.text;
+}
+
 function updateCountdown() {
+
     const now = new Date();
     const diff = revealDate - now;
 
     if (diff <= 0) {
-        document.getElementById("answer").innerHTML = "Yes.";
+
+        document.getElementById("answer").innerHTML = "YES.";
+
+        document.getElementById("answer").className = "priest";
+
+        document.getElementById("status").className = "priest";
+
+        document.getElementById("status").innerHTML =
+        "After months of analysis, he became a healer again.";
+
         document.getElementById("countdown").innerHTML =
-            "Turns out it was Warrior all along.";
+        "The mystery has been solved.";
+
         return;
     }
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const mins = Math.floor((diff / (1000 * 60)) % 60);
-    const secs = Math.floor((diff / 1000) % 60);
+    const days = Math.floor(diff/(1000*60*60*24));
+    const hours = Math.floor((diff/(1000*60*60))%24);
+    const mins = Math.floor((diff/(1000*60))%60);
+    const secs = Math.floor((diff/1000)%60);
 
     document.getElementById("countdown").innerHTML =
-        `${days} Days ${hours} Hours ${mins} Minutes ${secs} Seconds`;
+    `${days} Days ${hours} Hours ${mins} Minutes ${secs} Seconds`;
 }
 
-setInterval(updateCountdown, 1000);
+randomStatus();
+
+setInterval(updateCountdown,1000);
+setInterval(randomStatus,5000);
+
 updateCountdown();
+
 </script>
 
 </body>
